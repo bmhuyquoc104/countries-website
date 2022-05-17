@@ -18,7 +18,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to database 
+// Connect to database
 mongoose.connect(
   "mongodb+srv://bmhuyquoc104:Huy010400@cluster0.jg0zx.mongodb.net/test",
   { useNewUrlParser: true }
@@ -28,7 +28,7 @@ mongoose.connect(
 const PORT = process.env.PORT || 8000;
 const HOSTNAME = process.env.HOSTNAME || "localhost";
 
-// Run the server 
+// Run the server
 app.listen(PORT, HOSTNAME, () => {
   console.log(`listening on port: http://${HOSTNAME}:${PORT}`);
 });

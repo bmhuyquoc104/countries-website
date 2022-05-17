@@ -1,13 +1,14 @@
 import React from "react";
-import imageResoures from "./assets/imageResoure";
+import { StyledGlobal } from "./GlobalStyled";
 
 function App() {
- 
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-      <img src={imageResoures.NetlifyLogo} alt="test" />
-    </div>
+    <>
+      <StyledGlobal />
+      <div className="App">
+        <h1>Hello World</h1>
+      </div>
+    </>
   );
 }
 
