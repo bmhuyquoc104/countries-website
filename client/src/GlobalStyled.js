@@ -6,8 +6,14 @@ const StyledGlobal = createGlobalStyle`
         --bg_darkMode:hsl(207, 26%, 17%);
         --element_darkMode: hsl(209, 23%, 22%);
         --text_lightMode: hsl(200, 15%, 8%);
-        --bg_lightMode:hsl(0, 0%, 98%);
-        --element_lightMode:hsl(0, 0%, 52%);
+        --bg_lightMode:#fafafa;
+        --element_lightMode:#ffffff;
+        --text2_lightMode: hsl(0, 0%, 52%);
+        --fw_large:800,
+        --fw_medium:600,
+        --fw_small:300,
+        --fs_large:"1rem",
+        --fs_small:"0.875rem",
     }
 
     *,*::after,*::before{
@@ -17,9 +23,6 @@ const StyledGlobal = createGlobalStyle`
     }
     
     #root{
-        display: flex;
-        align-items: center;
-        justify-content:center;
         width: 100%;
     }
 
@@ -27,6 +30,7 @@ const StyledGlobal = createGlobalStyle`
         min-height:100vh;
         background-color: ${({ theme }) => theme.body.backgroundColor};
         color: ${({ theme }) => theme.body.color};
+        font-family: 'Nunito Sans', sans-serif;
     }
 `;
 
