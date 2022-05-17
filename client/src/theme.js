@@ -7,6 +7,9 @@ const lightTheme = {
   header: {
     backgroundColor: "var(--element_lightMode)",
   },
+  icon: {
+    color: "var(--text_lightMode)",
+  },
 };
 
 const darkTheme = {
@@ -17,6 +20,9 @@ const darkTheme = {
   },
   header: {
     backgroundColor: "var(--element_darkMode)",
+  },
+  icon: {
+    color: "var(--text_darkMode)",
   },
 };
 

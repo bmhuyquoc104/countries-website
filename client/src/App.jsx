@@ -3,6 +3,7 @@ import { ThemeProvider } from "styled-components";
 import StyledGlobal from "./GlobalStyled";
 import { lightTheme, darkTheme } from "./theme";
 import Header from "./components/Header/Header";
+import SearchFilter from "./components/SearchFilter/SearchFilter";
 import useTheme from "./hooks/useTheme";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <StyledGlobal />
       <div className="App">
         <Header theme={theme} themeToggler={themeToggler} />
+        <SearchFilter />
       </div>
     </ThemeProvider>
   );

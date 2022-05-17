@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
     background-color: ${({ theme }) => theme.header.backgroundColor};
     box-shadow: ${({ theme }) => theme.body.boxShadow};
     color: ${({ theme }) => theme.body.color};
-    min-height: 6vh;
+    min-height: 10vh;
     display: flex;
     padding: 0 2em;
     align-items: center;
