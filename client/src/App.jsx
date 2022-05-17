@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import imageResoures from './assets/imageResoure';
+import imageResoures from "./assets/imageResoure";
 
 function App() {
   return (

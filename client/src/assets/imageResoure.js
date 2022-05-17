@@ -1,6 +1,6 @@
-import MyHome from './images/myhome.png';
+import MyHome from "./images/myhome.png";
 
-import NetlifyLogo from './images/Netlify.png';
+import NetlifyLogo from "./images/Netlify.png";
 
 const imageResoures = { MyHome, NetlifyLogo };
 
