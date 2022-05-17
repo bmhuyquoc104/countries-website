@@ -1,3 +1,3 @@
 import MyHome from './images/myhome.png';
-
-export const imageResoures = {MyHome};
+import NetlifyLogo from './images/Netlify.png'
+export const imageResoures = {MyHome,NetlifyLogo};

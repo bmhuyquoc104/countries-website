@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <h1>Hello World</h1>
-      <img src = {imageResoures.MyHome}></img>
+      <img src = {imageResoures.NetlifyLogo}></img>
     </div>
   )
 }
