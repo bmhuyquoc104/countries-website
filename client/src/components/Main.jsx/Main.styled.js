@@ -4,12 +4,12 @@ const StyledMain = styled.main`
   display: grid;
   padding: 2em;
   grid-template-columns: auto;
-  gap: 3em;
+  gap: 5em;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
   .country {
     background-color: ${({ theme }) => theme.header.backgroundColor};
-    aspect-ratio: 1/1.25;
+    aspect-ratio: 1/1.15;
     display: flex;
     border-radius: 5px;
     box-shadow: 0px 5px 15px 10px rgba(0, 0, 0, 0.1);
@@ -17,13 +17,13 @@ const StyledMain = styled.main`
   }
   .country img {
     width: 100%;
-    height: 18vh;
+    height: 24vh;
     object-fit: cover;
   }
   .country-info {
     display: flex;
     flex-direction: column;
-    padding:1.5em;
+    padding:1.75em;
   }
 
   .country-info h1 {

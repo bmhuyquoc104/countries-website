@@ -8,7 +8,7 @@ const StyledHeader = styled.header`
     color: ${({ theme }) => theme.body.color};
     min-height: 10vh;
     display: flex;
-    padding: 0 2em;
+    padding: 0 3em;
     align-items: center;
     width: 100%;
     button {

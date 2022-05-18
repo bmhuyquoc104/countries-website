@@ -8,10 +8,8 @@ const useGetAllCountries = (onSuccess, onError) => (
   })
 );
 
-const useGetCountryByName = (onSuccess, onError, name) => (
-  useQuery(["country", name], () => getCountryByName, {
-    onSuccess,
-    onError,
+const useGetCountryByName = (name) => (
+  useQuery(["country", name], () => getCountryByName(name), {
     enabled: Boolean(name),
   })
 );

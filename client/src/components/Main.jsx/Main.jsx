@@ -3,6 +3,11 @@ import { useGetAllCountries } from "../../hooks/useCountry";
 import StyledMain from "./Main.styled";
 
 function Main() {
+  // eslint-disable-next-line func-names
+  const currency = function (number) {
+    return new Intl.NumberFormat("ja-JP", {
+    }).format(number);
+  };
   const {
     data: countries, isLoading, error, isError,
   } = useGetAllCountries();
@@ -24,7 +29,7 @@ function Main() {
                 <h1>{country.name.common}</h1>
                 <h2>
                   <span>Population:</span>
-                  {country.population}
+                  {currency(country.population)}
                 </h2>
                 <h2>
                   <span>Region:</span>
