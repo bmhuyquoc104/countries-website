@@ -4,6 +4,7 @@ import StyledGlobal from "./GlobalStyled";
 import { lightTheme, darkTheme } from "./theme";
 import Header from "./components/Header/Header";
 import SearchFilter from "./components/SearchFilter/SearchFilter";
+import Main from "./components/Main.jsx/Main";
 import useTheme from "./hooks/useTheme";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <div className="App">
         <Header theme={theme} themeToggler={themeToggler} />
         <SearchFilter />
+        <Main />
       </div>
     </ThemeProvider>
   );
