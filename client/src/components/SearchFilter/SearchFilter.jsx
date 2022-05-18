@@ -41,7 +41,7 @@ function SearchFilter() {
               {arr.map((e, index) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <button type="button" onClick={handleChange} key={index}>
-                  {e}
+                  <input readOnly value={e} />
                 </button>
               ))}
             </div>

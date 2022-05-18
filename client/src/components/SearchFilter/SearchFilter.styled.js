@@ -71,7 +71,9 @@ const StyledSearchFilter = styled.section`
     flex-direction: column;
     gap: 0.2em;
   }
-  .options button {
+  .options input {
+    padding: 0;
+    width:inherit;  
     text-align: left;
   }
 
