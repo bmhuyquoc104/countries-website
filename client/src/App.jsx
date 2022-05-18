@@ -19,7 +19,7 @@ function App() {
         <Header theme={theme} themeToggler={themeToggler} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:name" element={<CountryDetail />} />
+          <Route path="/:country" element={<CountryDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
