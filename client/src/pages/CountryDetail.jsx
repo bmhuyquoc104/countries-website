@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useGetCountryByName } from "../hooks/useCountry";
+import Country from "../components/Country/Country";
 
 function CountryDetail({ name }) {
   const {
@@ -23,7 +24,9 @@ function CountryDetail({ name }) {
   }
   console.log(country.data);
 
-  return <div>CountryDetail</div>;
+  return (
+    <Country />
+  );
 }
 
 CountryDetail.propTypes = {

@@ -1,12 +1,13 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { Routes, Route } from "react-router-dom";
 import StyledGlobal from "./GlobalStyled";
 import { lightTheme, darkTheme } from "./theme";
 import Header from "./components/Header/Header";
-import SearchFilter from "./components/SearchFilter/SearchFilter";
-import Main from "./components/Main.jsx/Main";
 import useTheme from "./hooks/useTheme";
 import CountryDetail from "./pages/CountryDetail";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [theme, themeToggler] = useTheme();
@@ -16,9 +17,11 @@ function App() {
       <StyledGlobal />
       <div className="App">
         <Header theme={theme} themeToggler={themeToggler} />
-        <SearchFilter />
-        <Main />
-        <CountryDetail />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:name" element={<CountryDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </ThemeProvider>
   );
