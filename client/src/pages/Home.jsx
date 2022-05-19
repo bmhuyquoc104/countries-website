@@ -5,8 +5,8 @@ import SearchFilter from "../components/SearchFilter/SearchFilter";
 function Home() {
   return (
     <>
-      <Main />
       <SearchFilter />
+      <Main />
     </>
   );
 }

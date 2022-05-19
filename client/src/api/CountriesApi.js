@@ -15,5 +15,12 @@ const getCountryByName = (name) => api.get(`/name/${name}`);
 // Function to get country by code
 const getCountryByCode = (code) => api.get(`/alpha/${code}`);
 
+// Function to get country by region
+const getCountryByRegion = (region) => api.get(`/region/${region}`);
 // Export functions
-export { getAllCountries, getCountryByName, getCountryByCode };
+export {
+  getAllCountries,
+  getCountryByName,
+  getCountryByCode,
+  getCountryByRegion,
+};

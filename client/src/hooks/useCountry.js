@@ -1,22 +1,37 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { useQuery } from "react-query";
-import { getAllCountries, getCountryByName, getCountryByCode } from "../api/CountriesApi";
+import {
+  getAllCountries,
+  getCountryByName,
+  getCountryByCode,
+  getCountryByRegion,
+} from "../api/CountriesApi";
 
-const useGetAllCountries = (onSuccess, onError) => (
+// Custom hook to get all countries using useQuery hook
+const useGetAllCountries = (onSuccess, onError) =>
   useQuery(["countries"], getAllCountries, {
     onSuccess,
     onError,
-  })
-);
+  });
 
-const useGetCountryByName = (name) => (
+// Custom hook to get country by name using useQuery hook
+const useGetCountryByName = (name) =>
   useQuery(["country", name], () => getCountryByName(name), {
     enabled: Boolean(name),
-  })
-);
-
-const useGetCountryByCode = (code) => (
+  });
+// Custom hook to get country by code using useQuery hook
+const useGetCountryByCode = (code) =>
   useQuery(["country-code", code], () => getCountryByCode(code), {
     enabled: Boolean(code),
-  })
-);
-export { useGetCountryByName, useGetAllCountries, useGetCountryByCode };
+  });
+// Custom hook to get country by region using useQuery hook
+const useGetCountryByRegion = (region) =>
+  useQuery(["country", region], () => getCountryByRegion(region), {
+    enabled: Boolean(region),
+  });
+export {
+  useGetCountryByName,
+  useGetAllCountries,
+  useGetCountryByCode,
+  useGetCountryByRegion,
+};
