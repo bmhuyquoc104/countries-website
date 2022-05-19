@@ -3,25 +3,44 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import { useGetCountryByName } from "../../hooks/useCountry";
+import {
+  useGetCountryByName,
+  useGetCountryByCode,
+} from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
 
 function Country() {
-  const { country } = useParams();
-  console.log(country);
+  // Get the params from the url
+  const { country, code } = useParams();
+  // Declare navigate for routing
   const navigate = useNavigate();
-  const { data, isError, error, isLoading } = useGetCountryByName(country);
+  // Fetch the data from the method getCountryByName
+  const {
+    data, isError, error, isLoading,
+  } = useGetCountryByName(country);
 
+  // Fetch the data from the method getCountryByCode
+  const {
+    data: countryByCode,
+    isError: isCodeError,
+    error: errorCode,
+    isLoading: isLoadingCode,
+  } = useGetCountryByCode(code);
+  // Render if the getByName is loading
   if (isLoading) {
     return <h1>Loading ...</h1>;
   }
-
+  // Render if the getByName is error
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-
-  if (!country) {
-    return "";
+  // Render if the getByCode is loading
+  if (isLoadingCode) {
+    return <h1>Loading ...</h1>;
+  }
+  // Render if the getByCode is error
+  if (isCodeError) {
+    return <h1>{errorCode.message}</h1>;
   }
 
   // Function to loop through the object and return all languages
@@ -68,67 +87,140 @@ function Country() {
         <FontAwesomeIcon icon={faArrowLeftLong} />
         Back
       </button>
-      <div>
-        {data.data?.map((element) => (
-          <div className="container" key={element.name.common}>
-            <img src={element.flags.png} alt="country-flag" />
-            <div className="country">
-              <h1>{element.name.common}</h1>
-              <div className="country-info">
-                <div className="left-info">
-                  <h2>
-                    <span>Native Name: </span>
-                    {showNativeName(element.name.nativeName)}
-                  </h2>
-                  <h2>
-                    <span>Population: </span>
-                    {convertPopulation(element.population)}
-                  </h2>
-                  <h2>
-                    <span>Region: </span>
-                    {element.region}
-                  </h2>
-                  <h2>
-                    <span>Sub Region: </span>
-                    {element.subregion}
-                  </h2>
-                  <h2>
-                    <span>Capital: </span>
-                    {element.capital}
-                  </h2>
+      {/* Load depend on the params from the url */}
+      {country ? (
+        <div>
+          {data.data?.map((element) => (
+            <div className="container" key={element.name.common}>
+              <img src={element.flags.png} alt="country-flag" />
+              <div className="country">
+                <h1>{element.name.common}</h1>
+                <div className="country-info">
+                  <div className="left-info">
+                    <h2>
+                      <span>Native Name: </span>
+                      {showNativeName(element.name.nativeName)}
+                    </h2>
+                    <h2>
+                      <span>Population: </span>
+                      {convertPopulation(element.population)}
+                    </h2>
+                    <h2>
+                      <span>Region: </span>
+                      {element.region}
+                    </h2>
+                    <h2>
+                      <span>Sub Region: </span>
+                      {element.subregion}
+                    </h2>
+                    <h2>
+                      <span>Capital: </span>
+                      {element.capital}
+                    </h2>
+                  </div>
+                  <div className="right-info">
+                    <h2>
+                      {" "}
+                      <span>Top Level Domain: </span>
+                      {element.tld[0]}
+                    </h2>
+                    <h2>
+                      {" "}
+                      <span>Currencies: </span>
+                      {showCurrency(element.currencies)}
+                    </h2>
+                    <h2>
+                      {" "}
+                      <span>Languages: </span>
+                      {showAllLanguages(element.languages)}
+                    </h2>
+                  </div>
                 </div>
-                <div className="right-info">
-                  <h2>
-                    {" "}
-                    <span>Top Level Domain: </span>
-                    {element.tld[0]}
-                  </h2>
-                  <h2>
-                    {" "}
-                    <span>Currencies: </span>
-                    {showCurrency(element.currencies)}
-                  </h2>
-                  <h2>
-                    {" "}
-                    <span>Languages: </span>
-                    {showAllLanguages(element.languages)}
-                  </h2>
-                </div>
-              </div>
-              <div className="border-countries">
-                <span>Border Countries: </span>
-                <div className="border-container">
-                  {element.borders?.map((border) => (
-                    <button className="border" type="button">
-                      {border}
-                    </button>
-                  ))}
+                <div className="border-countries">
+                  <span>Border Countries: </span>
+                  <div className="border-container">
+                    {element.borders?.map((border) => (
+                      <button
+                        onClick={() => navigate(`/alpha/${border}`)}
+                        className="border"
+                        type="button"
+                      >
+                        {border}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          {countryByCode.data?.map((element) => (
+            <div className="container" key={element.name.common}>
+              <img src={element.flags.png} alt="country-flag" />
+              <div className="country">
+                <h1>{element.name.common}</h1>
+                <div className="country-info">
+                  <div className="left-info">
+                    <h2>
+                      <span>Native Name: </span>
+                      {showNativeName(element.name.nativeName)}
+                    </h2>
+                    <h2>
+                      <span>Population: </span>
+                      {convertPopulation(element.population)}
+                    </h2>
+                    <h2>
+                      <span>Region: </span>
+                      {element.region}
+                    </h2>
+                    <h2>
+                      <span>Sub Region: </span>
+                      {element.subregion}
+                    </h2>
+                    <h2>
+                      <span>Capital: </span>
+                      {element.capital}
+                    </h2>
+                  </div>
+                  <div className="right-info">
+                    <h2>
+                      {" "}
+                      <span>Top Level Domain: </span>
+                      {element.tld[0]}
+                    </h2>
+                    <h2>
+                      {" "}
+                      <span>Currencies: </span>
+                      {showCurrency(element.currencies)}
+                    </h2>
+                    <h2>
+                      {" "}
+                      <span>Languages: </span>
+                      {showAllLanguages(element.languages)}
+                    </h2>
+                  </div>
+                </div>
+                <div className="border-countries">
+                  <span>Border Countries: </span>
+                  <div className="border-container">
+                    {element.borders?.map((border) => (
+                      <button
+                        onClick={() => navigate(`/alpha/${border}`)}
+                        className="border"
+                        type="button"
+                      >
+                        {border}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </StyledCountry>
   );
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getAllCountries, getCountryByName } from "../api/CountriesApi";
+import { getAllCountries, getCountryByName, getCountryByCode } from "../api/CountriesApi";
 
 const useGetAllCountries = (onSuccess, onError) => (
   useQuery(["countries"], getAllCountries, {
@@ -13,4 +13,10 @@ const useGetCountryByName = (name) => (
     enabled: Boolean(name),
   })
 );
-export { useGetCountryByName, useGetAllCountries };
+
+const useGetCountryByCode = (code) => (
+  useQuery(["country-code", code], () => getCountryByCode(code), {
+    enabled: Boolean(code),
+  })
+);
+export { useGetCountryByName, useGetAllCountries, useGetCountryByCode };

@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:country" element={<CountryDetail />} />
+          <Route path="/alpha/:code" element={<CountryDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
