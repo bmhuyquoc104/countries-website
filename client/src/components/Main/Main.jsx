@@ -9,10 +9,13 @@ function Main() {
   // Convert string to this format
   const navigate = useNavigate();
 
+  // eslint-disable-next-line func-names
   const currency = function (number) {
     return new Intl.NumberFormat("ja-JP", {}).format(number);
   };
-  const { data: countries, isLoading, error, isError } = useGetAllCountries();
+  const {
+    data: countries, isLoading, error, isError,
+  } = useGetAllCountries();
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -23,7 +26,7 @@ function Main() {
 
   return (
     <StyledMain>
-      {countries.data.map((country, index) => (
+      {countries.data?.map((country, index) => (
         <ul key={country.name.common} className="main-container">
           {index < 8 ? (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -33,20 +36,20 @@ function Main() {
               }}
               className="country"
             >
-              <img src={country.flags.png} alt="country-flag" />
+              <img src={country?.flags?.png} alt="country-flag" />
               <div className="country-info">
-                <h1>{country.name.common}</h1>
+                <h1>{country?.name?.common}</h1>
                 <h2>
                   <span>Population:</span>
-                  {currency(country.population)}
+                  {currency(country?.population)}
                 </h2>
                 <h2>
                   <span>Region:</span>
-                  {country.region}
+                  {country?.region}
                 </h2>
                 <h2>
                   <span>Capital:</span>
-                  {country.capital[0]}
+                  {country?.capital}
                 </h2>
               </div>
             </li>
