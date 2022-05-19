@@ -4,6 +4,7 @@ import StyledMain from "./Main.styled";
 
 function Main() {
   // eslint-disable-next-line func-names
+  // Convert string to this format
   const currency = function (number) {
     return new Intl.NumberFormat("ja-JP", {
     }).format(number);

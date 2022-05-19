@@ -1,13 +1,15 @@
 /* eslint-disable arrow-body-style */
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useGetCountryByName } from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
 
 function Country({ name }) {
-  const { data, isError, error, isLoading } = useGetCountryByName("belgium");
+  const navigate = useNavigate();
+  const { data, isError, error, isLoading } = useGetCountryByName("canada");
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -31,6 +33,10 @@ function Country({ name }) {
     return temp.toString();
   };
 
+  // Convert string to this format
+  const convertPopulation = function (number) {
+    return new Intl.NumberFormat("ja-JP", {}).format(number);
+  };
   // Function to show nativeName depend on the object
   const showNativeName = (nativeName) => {
     const temp = [];
@@ -50,7 +56,13 @@ function Country({ name }) {
   };
   return (
     <StyledCountry>
-      <button type="button">
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+        className="back"
+        type="button"
+      >
         <FontAwesomeIcon icon={faArrowLeftLong} />
         Back
       </button>
@@ -63,42 +75,52 @@ function Country({ name }) {
               <div className="country-info">
                 <div className="left-info">
                   <h2>
-                    <span>Native Name:</span>
+                    <span>Native Name: </span>
                     {showNativeName(element.name.nativeName)}
                   </h2>
                   <h2>
-                    <span>Population:</span>
-                    {element.population}
+                    <span>Population: </span>
+                    {convertPopulation(element.population)}
                   </h2>
                   <h2>
-                    <span>Region</span>
+                    <span>Region: </span>
                     {element.region}
                   </h2>
                   <h2>
-                    <span>Sub Region:</span>
+                    <span>Sub Region: </span>
                     {element.subregion}
                   </h2>
                   <h2>
-                    <span>Capital:</span>
+                    <span>Capital: </span>
                     {element.capital}
                   </h2>
                 </div>
                 <div className="right-info">
                   <h2>
                     {" "}
-                    <span>Top Level Domain:</span>
+                    <span>Top Level Domain: </span>
                     {element.tld[0]}
                   </h2>
                   <h2>
                     {" "}
-                    <span>Currencies:</span>
+                    <span>Currencies: </span>
                     {showCurrency(element.currencies)}
                   </h2>
                   <h2>
                     {" "}
-                    <span>Languages</span>
+                    <span>Languages: </span>
                     {showAllLanguages(element.languages)}
                   </h2>
+                </div>
+              </div>
+              <div className="border-countries">
+                <span>Border Countries: </span>
+                <div className="border-container">
+                  {element.borders.map((border) => (
+                    <button className="border" type="button">
+                      {border}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
