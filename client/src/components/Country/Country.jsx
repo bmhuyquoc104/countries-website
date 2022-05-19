@@ -7,7 +7,7 @@ import { useGetCountryByName } from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
 
 function Country({ name }) {
-  const { data, isError, error, isLoading } = useGetCountryByName("Belgium");
+  const { data, isError, error, isLoading } = useGetCountryByName("belgium");
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -20,16 +20,33 @@ function Country({ name }) {
   // if (!name) {
   //   return "";
   // }
-  console.log(data.data);
 
+  // Function to loop through the object and return all languages
   const showAllLanguages = (languages) => {
-    Object.values(languages).forEach((language) => language);
+    const temp = [];
+    // eslint-disable-next-line no-return-assign
+    Object.values(languages).map((element) => {
+      return temp.push(element);
+    });
+    return temp.toString();
   };
 
-  const showCurrency = (currencies) => {
-    Object.values(currencies).map((currency) => {
-      return currency.name;
+  // Function to show nativeName depend on the object
+  const showNativeName = (nativeName) => {
+    const temp = [];
+    Object.values(nativeName).map((element) => {
+      return temp.push(element.common);
     });
+    return temp.pop();
+  };
+
+  // Function  to loop through the object and return all currencies
+  const showCurrency = (currencies) => {
+    const temp = [];
+    Object.values(currencies).map((currency) => {
+      return temp.push(currency.name);
+    });
+    return temp.toString();
   };
   return (
     <StyledCountry>
@@ -47,7 +64,7 @@ function Country({ name }) {
                 <div className="left-info">
                   <h2>
                     <span>Native Name:</span>
-                    {element.name.nativeName.nld.common}
+                    {showNativeName(element.name.nativeName)}
                   </h2>
                   <h2>
                     <span>Population:</span>
