@@ -1,17 +1,18 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetAllCountries } from "../../hooks/useCountry";
 import StyledMain from "./Main.styled";
 
 function Main() {
   // eslint-disable-next-line func-names
   // Convert string to this format
+  const navigate = useNavigate();
+
   const currency = function (number) {
-    return new Intl.NumberFormat("ja-JP", {
-    }).format(number);
+    return new Intl.NumberFormat("ja-JP", {}).format(number);
   };
-  const {
-    data: countries, isLoading, error, isError,
-  } = useGetAllCountries();
+  const { data: countries, isLoading, error, isError } = useGetAllCountries();
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -19,12 +20,19 @@ function Main() {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
   return (
     <StyledMain>
       {countries.data.map((country, index) => (
-        <div className="main-container">
+        <ul key={country.name.common} className="main-container">
           {index < 8 ? (
-            <div className="country" key={country.name.common}>
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <li
+              onClick={() => {
+                navigate(`/${country.name.common}`);
+              }}
+              className="country"
+            >
               <img src={country.flags.png} alt="country-flag" />
               <div className="country-info">
                 <h1>{country.name.common}</h1>
@@ -41,9 +49,9 @@ function Main() {
                   {country.capital[0]}
                 </h2>
               </div>
-            </div>
+            </li>
           ) : null}
-        </div>
+        </ul>
       ))}
     </StyledMain>
   );

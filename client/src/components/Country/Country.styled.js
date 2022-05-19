@@ -78,6 +78,7 @@ const StyledCountry = styled.main`
     font-size: 0.875rem;
     color: ${({ theme }) => theme.body.color};
     font-weight: 600;
+    margin-right:0.75em;
   }
   .border-container {
     display: flex;

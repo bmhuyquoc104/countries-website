@@ -1,15 +1,16 @@
 /* eslint-disable arrow-body-style */
 import React from "react";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useGetCountryByName } from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
 
-function Country({ name }) {
+function Country() {
+  const { country } = useParams();
+  console.log(country);
   const navigate = useNavigate();
-  const { data, isError, error, isLoading } = useGetCountryByName("canada");
+  const { data, isError, error, isLoading } = useGetCountryByName(country);
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -19,28 +20,29 @@ function Country({ name }) {
     return <h1>{error.message}</h1>;
   }
 
-  // if (!name) {
-  //   return "";
-  // }
+  if (!country) {
+    return "";
+  }
 
   // Function to loop through the object and return all languages
   const showAllLanguages = (languages) => {
     const temp = [];
     // eslint-disable-next-line no-return-assign
-    Object.values(languages).map((element) => {
+    Object.values(languages)?.map((element) => {
       return temp.push(element);
     });
     return temp.toString();
   };
 
   // Convert string to this format
+  // eslint-disable-next-line func-names
   const convertPopulation = function (number) {
     return new Intl.NumberFormat("ja-JP", {}).format(number);
   };
   // Function to show nativeName depend on the object
   const showNativeName = (nativeName) => {
     const temp = [];
-    Object.values(nativeName).map((element) => {
+    Object.values(nativeName)?.map((element) => {
       return temp.push(element.common);
     });
     return temp.pop();
@@ -49,7 +51,7 @@ function Country({ name }) {
   // Function  to loop through the object and return all currencies
   const showCurrency = (currencies) => {
     const temp = [];
-    Object.values(currencies).map((currency) => {
+    Object.values(currencies)?.map((currency) => {
       return temp.push(currency.name);
     });
     return temp.toString();
@@ -67,7 +69,7 @@ function Country({ name }) {
         Back
       </button>
       <div>
-        {data.data.map((element) => (
+        {data.data?.map((element) => (
           <div className="container" key={element.name.common}>
             <img src={element.flags.png} alt="country-flag" />
             <div className="country">
@@ -116,7 +118,7 @@ function Country({ name }) {
               <div className="border-countries">
                 <span>Border Countries: </span>
                 <div className="border-container">
-                  {element.borders.map((border) => (
+                  {element.borders?.map((border) => (
                     <button className="border" type="button">
                       {border}
                     </button>
@@ -131,11 +133,4 @@ function Country({ name }) {
   );
 }
 
-Country.propTypes = {
-  name: PropTypes.string,
-};
-
-Country.defaultProps = {
-  name: "",
-};
 export default Country;
