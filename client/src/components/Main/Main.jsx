@@ -20,9 +20,7 @@ function Main() {
     return new Intl.NumberFormat("ja-JP", {}).format(number);
   };
   // Get All Countries using the hook
-  const {
-    data, isLoading, error, isError, isFetched,
-  } = useGetAllCountries();
+  const { data, isLoading, error, isError, isFetched } = useGetAllCountries();
 
   // State to manage the page
   const [page, setPage] = useState(1);
@@ -39,7 +37,9 @@ function Main() {
   useEffect(() => {
     if (isFetched) {
       setCountries(
-        data.data.filter((element) => element.name.common.toLowerCase().includes(query.toLowerCase())),
+        data.data.filter((element) =>
+          element.name.common.toLowerCase().includes(query.toLowerCase())
+        )
       );
     }
   }, [data, query]);
@@ -96,7 +96,10 @@ function Main() {
               <button
                 type="button"
                 className="option"
-                onClick={(e) => setCountriesPerPage(e.target.value)}
+                onClick={(e) => {
+                  setCountriesPerPage(e.target.value);
+                  setIsToggle(false);
+                }}
               >
                 <input
                   // eslint-disable-next-line react/no-array-index-key

@@ -67,14 +67,20 @@ const StyledSearchFilter = styled.section`
   }
   .options {
     display: flex;
-    padding: 1em;
     flex-direction: column;
-    gap: 0.2em;
+    width:100%;
+  }
+  .options button {
+    padding:0;
   }
   .options input {
-    padding: 0;
-    width:inherit;  
-    text-align: left;
+    padding: 1.25em;
+    width:100%;  
+  }
+  .options input:hover {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.active.backgroundColor};
+    color: ${({ theme }) => theme.active.color};
   }
 
   @media (max-width: 480px) {

@@ -19,6 +19,7 @@ function SearchFilter() {
     useContext(CountryContext);
   const handleChange = (e) => {
     setRegion(e.target.value);
+    setIsToggle(false);
   };
   // useEffect(() => {
   //   console.log(query);
