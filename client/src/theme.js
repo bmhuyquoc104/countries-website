@@ -13,6 +13,10 @@ const lightTheme = {
   icon: {
     color: "var(--text_lightMode)",
   },
+  active: {
+    color: "var(--text_darkMode)",
+    backgroundColor: "var(--bg_darkMode)",
+  },
 };
 
 const darkTheme = {
@@ -29,6 +33,10 @@ const darkTheme = {
   },
   icon: {
     color: "var(--text_darkMode)",
+  },
+  active: {
+    color: "var(--text_lightMode)",
+    backgroundColor: "var(--bg_lightMode)",
   },
 };
 
