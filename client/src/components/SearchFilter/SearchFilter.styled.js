@@ -52,7 +52,7 @@ const StyledSearchFilter = styled.section`
     border: none;
   }
   .toggle {
-    z-index: 1;
+    z-index: 2;
     overflow-y: scroll;
     height: 27vh;
     gap: 0.3em;
@@ -86,7 +86,7 @@ const StyledSearchFilter = styled.section`
         width: 100%;
     };
     .container{
-        width: 55%;
+        width: 200px;
     }
   }
 `;

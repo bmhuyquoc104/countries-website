@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import StyledPagination from "./Pagination.styled";
 
 function Pagination({ totalPages, handleChangePage, page }) {
-  console.log(page);
   const pages = [];
   for (let i = 1; i <= totalPages; i += 1) {
     pages.push(i);

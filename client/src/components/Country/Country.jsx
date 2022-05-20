@@ -46,6 +46,9 @@ function Country() {
   // Function to loop through the object and return all languages
   const showAllLanguages = (languages) => {
     const temp = [];
+    if (languages == null) {
+      return "";
+    }
     // eslint-disable-next-line no-return-assign
     Object.values(languages)?.map((element) => {
       return temp.push(element);
@@ -61,6 +64,9 @@ function Country() {
   // Function to show nativeName depend on the object
   const showNativeName = (nativeName) => {
     const temp = [];
+    if (nativeName == null) {
+      return "";
+    }
     Object.values(nativeName)?.map((element) => {
       return temp.push(element.common);
     });
@@ -70,6 +76,9 @@ function Country() {
   // Function  to loop through the object and return all currencies
   const showCurrency = (currencies) => {
     const temp = [];
+    if (currencies == null) {
+      return "";
+    }
     Object.values(currencies)?.map((currency) => {
       return temp.push(currency.name);
     });
