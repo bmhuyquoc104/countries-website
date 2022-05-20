@@ -56,10 +56,17 @@ function Main() {
   //  Find the last and first index for slicing the arr
   const indexOfLastCountry = page * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  console.log(countriesPerPage);
   // Function to change to the required page
   const handleChangePage = (currentPage) => {
     setPage(currentPage);
+  };
+  // Function to change to next page
+  const handleNextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+  // Function to change previous page
+  const handlePreviousPage = () => {
+    setPage((prev) => prev - 1);
   };
   return (
     <StyledMain>
@@ -130,6 +137,8 @@ function Main() {
         handleChangePage={handleChangePage}
         totalPages={totalPages}
         page={page}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
       />
     </StyledMain>
   );
