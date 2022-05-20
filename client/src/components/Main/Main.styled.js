@@ -16,7 +16,6 @@ const StyledMain = styled.main`
   }
   .country {
     background-color: ${({ theme }) => theme.header.backgroundColor};
-    aspect-ratio: 1/1.15;
     display: flex;
     border-radius: 5px;
     box-shadow: 0px 5px 15px 10px rgba(0, 0, 0, 0.1);
@@ -24,7 +23,7 @@ const StyledMain = styled.main`
   }
   .country img {
     width: 100%;
-    height: 24vh;
+    height: 20vh;
     object-fit: cover;
   }
   .country-info {
@@ -55,7 +54,7 @@ const StyledMain = styled.main`
   }
   .limit-container {
     background-color: ${({ theme }) => theme.header.backgroundColor};
-    width: max(200px,15%);
+    width: max(200px, 15%);
     padding: 1em 0;
     position: relative;
     border-radius: 5px;
@@ -102,10 +101,15 @@ const StyledMain = styled.main`
     background-color: ${({ theme }) => theme.active.backgroundColor};
     color: ${({ theme }) => theme.active.color};
   }
-  @media (max-width:480px){
+  @media (max-width: 623px) {
+    .country img {
+      height: 30vh;
+    }
+  }
+  @media (max-width: 480px) {
     padding: 1em;
-    .limit-container{
-      margin-top:-1em;
+    .limit-container {
+      margin-top: -1em;
     }
   }
 `;

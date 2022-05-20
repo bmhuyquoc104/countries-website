@@ -1,10 +1,12 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useGetAllCountries } from "../../hooks/useCountry";
+import CountryContext from "../../hooks/useCountryContext";
 import StyledMain from "./Main.styled";
 import Pagination from "../Pagination/Pagination";
 
@@ -18,7 +20,9 @@ function Main() {
     return new Intl.NumberFormat("ja-JP", {}).format(number);
   };
   // Get All Countries using the hook
-  const { data, isLoading, error, isError, isFetched } = useGetAllCountries();
+  const {
+    data, isLoading, error, isError, isFetched,
+  } = useGetAllCountries();
 
   // State to manage the page
   const [page, setPage] = useState(1);
@@ -27,16 +31,18 @@ function Main() {
   const [countriesPerPage, setCountriesPerPage] = useState(8);
 
   // State to manage the countries
-  const [countries, setCountries] = useState([]);
+  const { countries, setCountries } = useContext(CountryContext);
 
   // State to mange limit container
   const [isToggle, setIsToggle] = useState(false);
-
+  const { query } = useContext(CountryContext);
   useEffect(() => {
     if (isFetched) {
-      setCountries(data.data);
+      setCountries(
+        data.data.filter((element) => element.name.common.toLowerCase().includes(query.toLowerCase())),
+      );
     }
-  }, [data]);
+  }, [data, query]);
 
   // country per page arr options
   const limitCountries = [8, 12, 16, 20];
@@ -68,6 +74,7 @@ function Main() {
   const handlePreviousPage = () => {
     setPage((prev) => prev - 1);
   };
+
   return (
     <StyledMain>
       <div className="limit-container">

@@ -11,17 +11,21 @@ function Pagination({
 }) {
   const pages = [];
   let i = 1;
+  // Array to display pagination
   while (i < totalPages) {
+    // Display part of the arr
     if (i <= 3 || i >= totalPages - 2 || (i >= page - 1 && i <= page + 1)) {
       pages.push(i);
       i += 1;
     } else {
+      // use dot dot dot to display when the pagination is long
       pages.push("...");
       i = i < page ? page - 1 : totalPages - 2;
     }
   }
   return (
     <StyledPagination>
+      {/* Check if this is the first page or not */}
       {page === 1 ? (
         <button type="button" disabled className="otherPages">
           Prev
@@ -51,6 +55,7 @@ function Pagination({
             </button>
           ) : (
             <div>
+              {/* remove click events for dot dot dot */}
               {arr[index] === "..." ? (
                 <button
                   onClick={() => handleChangePage(element)}
@@ -76,6 +81,7 @@ function Pagination({
           )}
         </div>
       ))}
+      {/* Check if the currentPage is last page */}
       {page === pages.pop() ? (
         <button type="button" disabled className="otherPages">
           Next
@@ -89,6 +95,7 @@ function Pagination({
   );
 }
 
+// Declare propTypes
 Pagination.propTypes = {
   totalPages: PropTypes.number,
   handleChangePage: PropTypes.func,
@@ -97,6 +104,7 @@ Pagination.propTypes = {
   handlePreviousPage: PropTypes.func,
 };
 
+// Declare default props
 Pagination.defaultProps = {
   totalPages: 0,
   handleChangePage: () => {},

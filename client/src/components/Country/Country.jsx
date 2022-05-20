@@ -1,5 +1,5 @@
 /* eslint-disable arrow-body-style */
-import React from "react";
+import React, {useContext} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import {
   useGetCountryByCode,
 } from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
-
+import CountryContext from "../../hooks/useCountryContext";
 function Country() {
   // Get the params from the url
   const { country, code } = useParams();
@@ -18,6 +18,8 @@ function Country() {
   const {
     data, isError, error, isLoading,
   } = useGetCountryByName(country);
+
+  const { setQuery } = useContext(CountryContext);
 
   // Fetch the data from the method getCountryByCode
   const {
@@ -88,7 +90,8 @@ function Country() {
     <StyledCountry>
       <button
         onClick={() => {
-          navigate("/");
+          navigate((-1));
+          setQuery("");
         }}
         className="back"
         type="button"

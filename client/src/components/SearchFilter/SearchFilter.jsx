@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-else-return */
+import React, { useState, useContext, useEffect } from "react";
 // eslint-disable-next-line import/no-unresolved
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,21 +7,42 @@ import {
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
+import CountryContext from "../../hooks/useCountryContext";
 import StyledSearchFilter from "./SearchFilter.styled";
 
 function SearchFilter() {
   const arr = ["Africa", "America", "Asia", "Europe", "Oceania"];
   const [isToggle, setIsToggle] = useState(false);
-  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  // Get All Countries using the hook
+  const { countries, setCountries, query, setQuery } =
+    useContext(CountryContext);
   const handleChange = (e) => {
-    setCountry(e.target.value);
+    setRegion(e.target.value);
   };
-  console.log(country);
+  // useEffect(() => {
+  //   console.log(query);
+  //   setCountries(
+  //     countries.filter((country) => {
+  //       if (query === "") {
+  //         return country;
+  //       } else if (
+  //         country.name.common.toLowerCase().includes(query.toLowerCase())
+  //       ) {
+  //         return country;
+  //       }
+  //     })
+  //   );
+  // }, [query]);
+
   return (
     <StyledSearchFilter>
       <div className="search-bar">
         <FontAwesomeIcon icon={faMagnifyingGlass} />
-        <input placeholder="Search for a country..." />
+        <input
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for a country..."
+        />
       </div>
       <div className="container">
         <button

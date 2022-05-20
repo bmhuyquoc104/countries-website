@@ -26,7 +26,7 @@ const useGetCountryByCode = (code) =>
   });
 // Custom hook to get country by region using useQuery hook
 const useGetCountryByRegion = (region) =>
-  useQuery(["country", region], () => getCountryByRegion(region), {
+  useQuery(["countries-region", region], () => getCountryByRegion(region), {
     enabled: Boolean(region),
   });
 export {
