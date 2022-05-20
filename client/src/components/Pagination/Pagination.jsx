@@ -10,8 +10,15 @@ function Pagination({
   handlePreviousPage,
 }) {
   const pages = [];
-  for (let i = 1; i <= totalPages; i += 1) {
-    pages.push(i);
+  let i = 1;
+  while (i < totalPages) {
+    if (i <= 3 || i >= totalPages - 2 || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+      i += 1;
+    } else {
+      pages.push("...");
+      i = i < page ? page - 1 : totalPages - 2;
+    }
   }
   return (
     <StyledPagination>
@@ -29,10 +36,10 @@ function Pagination({
         </button>
       )}
 
-      {pages.map((element, index) => (
+      {pages.map((element, index, arr) => (
         // eslint-disable-next-line react/no-array-index-key
         <div>
-          {index + 1 === page ? (
+          {arr[index] === page ? (
             <button
               onClick={() => handleChangePage(element)}
               type="button"
@@ -43,15 +50,29 @@ function Pagination({
               {element}
             </button>
           ) : (
-            <button
-              onClick={() => handleChangePage(element)}
-              type="button"
-              className="otherPages"
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-            >
-              {element}
-            </button>
+            <div>
+              {arr[index] === "..." ? (
+                <button
+                  onClick={() => handleChangePage(element)}
+                  type="button"
+                  className="otherPages dot"
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                >
+                  {element}
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleChangePage(element)}
+                  type="button"
+                  className="otherPages"
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                >
+                  {element}
+                </button>
+              )}
+            </div>
           )}
         </div>
       ))}

@@ -31,6 +31,9 @@ const StyledPagination = styled.div`
     opacity:0.2 ;
     pointer-events: none;
   }
+  .otherPages.dot{
+    pointer-events: none;
+  }
 `;
 
 export default StyledPagination;
