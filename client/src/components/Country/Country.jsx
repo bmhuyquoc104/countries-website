@@ -1,5 +1,5 @@
 /* eslint-disable arrow-body-style */
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,7 @@ import {
 } from "../../hooks/useCountry";
 import StyledCountry from "./Country.styled";
 import CountryContext from "../../hooks/useCountryContext";
+
 function Country() {
   // Get the params from the url
   const { country, code } = useParams();

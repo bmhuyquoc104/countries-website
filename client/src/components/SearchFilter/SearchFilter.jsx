@@ -1,5 +1,7 @@
 /* eslint-disable no-else-return */
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 // eslint-disable-next-line import/no-unresolved
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,30 +13,25 @@ import CountryContext from "../../hooks/useCountryContext";
 import StyledSearchFilter from "./SearchFilter.styled";
 
 function SearchFilter() {
-  const arr = ["Africa", "America", "Asia", "Europe", "Oceania"];
+  // Options in filter box
+  const arr = ["All", "Africa", "America", "Asia", "Europe", "Oceania"];
+  // State to manage the dropdown
   const [isToggle, setIsToggle] = useState(false);
-  const [region, setRegion] = useState("");
-  // Get All Countries using the hook
-  const { countries, setCountries, query, setQuery } =
-    useContext(CountryContext);
+  // Declare navigate for routing
+  const navigate = useNavigate();
+  // Get setQuery from useContext
+  const { setQuery } = useContext(CountryContext);
+  // Get All Countries By Region using the hook
   const handleChange = (e) => {
-    setRegion(e.target.value);
+    const region = e.target.value;
+    // If option is all -> return all region by routing to home page
+    if (region === "All") {
+      navigate("/");
+    } else {
+      navigate(`/region/${region}`, { replace: true });
+    }
     setIsToggle(false);
   };
-  // useEffect(() => {
-  //   console.log(query);
-  //   setCountries(
-  //     countries.filter((country) => {
-  //       if (query === "") {
-  //         return country;
-  //       } else if (
-  //         country.name.common.toLowerCase().includes(query.toLowerCase())
-  //       ) {
-  //         return country;
-  //       }
-  //     })
-  //   );
-  // }, [query]);
 
   return (
     <StyledSearchFilter>
