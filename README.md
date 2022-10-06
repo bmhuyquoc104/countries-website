@@ -35,7 +35,7 @@ A responsive website that built to let a user research and gain knowledge of all
   </div>
   <div>
     <p>Mobile country Website</p>
-    <img style = "object-fit:contain" src = "https://i.imgur.com/AofiaGH.png" width="800" height="400"/>
+    <img style = "object-fit:contain" src = "https://i.imgur.com/AofiaGH.png" width="400" height="700"/>
   </div>
   <div>
     <p>Website country information</p>
